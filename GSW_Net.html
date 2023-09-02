@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" type="text/css" href="GSW_Net.css">
+    <style>
+        @media screen and (max-width: 800px) {
+    .leftcolumn, .rightcolumn {   
+      width: 100%;
+      padding: 0;
+    }
+  }
+   
+  /* 响应式布局 -屏幕尺寸小于 400px 时，导航等布局改为上下布局 */
+  @media screen and (max-width: 400px) {
+    .guide_a a {
+      float: none;
+      width: 100%;
+    }
+  }
+    </style>
+    <title>BeDOI: Benchmarks for Determining Overlapping Images with Photogrammetric Information</title>
+</head>
+<body>
+  <!-- 头部导航栏 -->
+  <ul class = "HeadMenu">
+    <li class="HeadMenu_Content"><a class="LinkTo" href="#Introduction">Introduction</a></li>
+    <li class="HeadMenu_Content"><a class="LinkTo" href="#Generation">Generation</a></li>
+    <li class="HeadMenu_Content"><a class="LinkTo" href="#Details">Details</a></li>
+    <li class="HeadMenu_Content"><a class="LinkTo" href="#Data Downloading">Data Downloading</a></li>
+    <li class="HeadMenu_Content"><a class="LinkTo" href="#Experiments">Experiments</a></li>
+    <li class="HeadMenu_Content"><a class="LinkTo" href="#About us">About us</a></li>
+  </ul>
+
+  <!-- 占位符 -->
+  <div class = "Empty_50"></div>
+
+  <!-- 主标题以及背景图片 -->
+  <div class = "HeadPicture">
+    <div class = "HeadWord">
+      <!-- 占位符 -->
+      <div class = "Empty_50"></div>
+      BeDOI: Benchmarks for Determining Overlapping Images<br>
+      with Photogrammetric Information
+      <!-- 占位符 -->
+      <div class = "Empty_20"></div>
+      <p class = "HeadWord">Hao, Zhan; YiFei YU; YiWei Xu</p>
+    </div>
+  </div>
+
+  <!-- Introduction -->
+  <div class = "WhitePart">
+    <div class = "MainText_Title"><br><section id = "Introduction">Introduction</section><br></div>
+  </div>
+  <div class = "WhitePart">
+    <div class = "MainText_Content">
+      <br>
+      Nowadays, with the development of sensor technology, acquiring image data has become easier and more efficient.
+      However, the growing number of image has made fast and accurate image matching become a huge bottleneck in terms of the time efficiency of SfM.
+      <br><br>
+      To break through the bottleneck, we can employ methods such as Bag-of-Words (BoW) trees or Convolutional Neural Networks (CNNs).
+      But there still exists some limitations when it comes to the methods above: On the one hand, due to the lack of the standard referenced overlapping relationship, 
+      the evalutaion of a method usually relies on the quality of SfM orientation result. It is obviously not rigorous enough. On the other hand, 
+      Methods like VGG or ResNet are commonly trained on ImageNet which actually brings train data bias and task bias issues, making it difficult to transfer them to the task of determining overlapping image pairs.
+      <br><br>
+      Therefore, in order to solve the problems, our project aims to create a standardized dataset with labeled overlapping image pairs based on the traditional photogrammetric procedures.
+      <br><br>
+      Otherwise, this project is a part of the project which is shown below, which aims to get a more efficient and suitable algorithm for overlapping image pairs retrievel.
+      If you want to get more details about the project shown below, you can visit the ISPRS website through the following URL for viewing.<br><br>
+    </div>
+  </div>
+  <div class = "WhitePart">
+    <img src="ISPRS_Fig.jpg" width = "600" height = "560">
+  </div>
+  <div class = "WhitePart">
+    <a class = "LinkToISPRS" href = "https://www.isprs.org/society/si/default.aspx"><p>https://www.isprs.org/society/si/default.aspx<br><br></p></a>
+  </div>
+
+  <!-- Generation -->
+  <div class = "GreyPart">
+    <div class = "MainText_Title"><br><section id = "Generation">Generation</section><br><br></div>
+  </div>
+  <div class = "GreyPart">
+    <div class = "MainText_Content">
+      The overall pipeline to automatically generate BeDOI is illustrated in the figure below, 
+      in which pre-processing is for obtaining 3D mesh model and image orientation parameters, 
+      and automatic annotation is for estimating referenced overlapping relationships:
+      <br><br>
+    </div>
+  </div>
+  <div class = "GreyPart">
+    <img src="GenerationProcess.jpg" width = "600" height = "560">
+  </div>
+  <div class = "GreyPart">
+    <div class = "MainText_Content">
+      <br>
+      1. Pre-Processing:<br>
+      <ul>
+        <li>Store images captured in different regions separately.</li>
+        <li>Use Context Capture to get the mesh models and the POS of every group of images.</li>
+      </ul>
+      2. Automatic Annotation:<br>
+      <ul>
+        <li>Triangle Reprojection</li>
+        <li>Occlusion Removal</li>
+        <li>Generation of overlapping relationships</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Details -->
+  <div class = "WhitePart">
+    <div class = "MainText_Title"><br><section id = "Details">Details</section><br></div>
+  </div>
+  <div class = "WhitePart">
+    <div class = "MainText_Content">
+      <br>
+      Here, we present all the image data currently included in this dataset, 
+      including 14 Single Datasets and one AllData. In total, the dataset contains 13,667 images.
+      <br><br>
+      Table and pictures below show part of images, overlapping relationship matrix and mesh models included in our dataset:<br><br>
+    </div>
+  </div>
+  <div class = "WhitePart">
+    <img src="ImageDetailTable.jpg" width = "600" height = "350">
+  </div>
+  <div class = "WhitePart">
+    <br><br>
+  </div>
+  <div class = "WhitePart">
+    <table>
+      <tr>
+        <td><img src="SKFX1.jpg" width = "220" height = "135"></td>
+        <td rowspan="2"><img src="SKFX3.jpg" width = "320" height = "220"></td>
+        <td rowspan="2"><img src="SKFX4.jpg" width = "320" height = "220"></td>
+      </tr>
+      <tr>
+        <td><img src="SKFX2.jpg" width = "220" height = "135"></td>
+      </tr>
+      <tr>
+        <td colspan="3" class = "SHOWDETAILS">SKFX<br><br></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Data Downloading -->
+  <div class = "GreyPart">
+    <div class = "MainText_Title"><br><section id = "Data Downloading">Data Downloading</section><br></div>
+  </div>
+  <div class = "GreyPart">
+    <div class = "MainText_Content">
+      <br>
+      we have already uploaded the download links for the data to GitHub. 
+      You can access the dataset by scanning the QR code below or using the following URL. 
+      <br><br>
+      (If you wish to use the data we provide, please cite our paper in your research, thank you)
+      <br><br>
+    </div>
+  </div>
+  <div class = "GreyPart">
+    <img src="QR_Code.jpg" width = "400" height = "400">
+  </div>
+  <div class = "GreyPart">
+    <a class = "LinkToBeDOI" href = "https://github.com/xywjohn/BeDOI"><p>https://github.com/xywjohn/BeDOI<br><br></p></a>
+  </div>
+
+  <!-- Experiment -->
+  <div class = "WhitePart">
+    <div class = "MainText_Title"><br><section id = "Experiments">Experiments</section><br></div>
+  </div>
+  <div class = "WhitePart">
+    <div class = "MainText_Content">
+      <br>
+      Our experiment aims to test commonly used image matching or feature extracting methods. And here is the process:
+      <br>
+      <ul>
+        <li>Extract feature descriptors by a certain method.</li>
+        <li>Randomly sample 100 images and compute their similarity with all images.(We have already finished this step, the sample images' name have been provided below)</li>
+        <li>Extract the Top-N most similar images for each image based on the similarity, and sort them.</li>
+        <li>Calculate precision and recall for each algorithm at different N values by comparing with the result provided by BeDOI.</li>
+      </ul>
+      <a class = "LinkToBeDOI" href = "https://github.com/xywjohn/BeDOI"><p>If you want to get the sample, CLICK ME!<br><br></p></a>
+    </div>
+  </div>
+  <div class = "WhitePart">
+    <div class = "MainText_Content">
+      Here we show some of the algorithms which have already been tested with the corresponding results:<br><br>
+    </div>
+  </div>
+  <div class = "WhitePart">
+    <table border="1">
+      <tr>
+        <td class = "Experiments">Algorithm Name</td>
+        <td class = "Experiments">Feature Descriptor</td>
+        <td class = "Experiments">Dimension</td>
+        <td class = "Experiments">Similarity</td>
+      </tr>
+      <tr>
+        <td class = "Experiments">VGG-16</td>
+        <td class = "Experiments">The feature vector output from the last max-pooling layer</td>
+        <td class = "Experiments">512*7*7</td>
+        <td class = "Experiments">Euclidean Distance</td>
+      </tr>
+      <tr>
+        <td class = "Experiments">ResNet-18</td>
+        <td class = "Experiments">The feature vector output from the average pooling layer</td>
+        <td class = "Experiments">512</td>
+        <td class = "Experiments">Euclidean Distance</td>
+      </tr>
+      <tr>
+        <td class = "Experiments">Random k-d Forest</td>
+        <td class = "Experiments">1000 Key Points with their Descriptors</td>
+        <td class = "Experiments">128*1000</td>
+        <td class = "Experiments">Similarity Formula</td>
+      </tr>
+      <tr>
+        <td class = "Experiments">SuperGlue</td>
+        <td class = "Experiments">1024 Key Points with their Descriptors</td>
+        <td class = "Experiments">256*1024</td>
+        <td class = "Experiments">GNN</td>
+      </tr>
+      <tr>
+        <td class = "Experiments">...</td>
+        <td class = "Experiments">...</td>
+        <td class = "Experiments">...</td>
+        <td class = "Experiments">...</td>
+      </tr>
+    </table>
+    <br><br>
+  </div>
+  <div class = "WhitePart">
+    <div class = "Empty_20"></div>
+  </div>
+  <div class = "WhitePart">
+    <table border="1">
+      <tr>
+        <td colspan="8" class = "Experiments">Average Precision</td>
+      </tr>
+      <tr>
+        <td class = "Experiments">Top-N</td>
+        <td class = "Experiments">Top-5</td>
+        <td class = "Experiments">Top-10</td>
+        <td class = "Experiments">Top-20</td>
+        <td class = "Experiments">Top-30</td>
+        <td class = "Experiments">Top-40</td>
+        <td class = "Experiments">Top-50</td>
+        <td class = "Experiments">Top-100</td>
+      </tr>
+      <tr>
+        <td class = "Experiments">VGG-16</td>
+        <td class = "Experiments">0.334</td>
+        <td class = "Experiments">0.265</td>
+        <td class = "Experiments">0.190</td>
+        <td class = "Experiments">0.154</td>
+        <td class = "Experiments">0.140</td>
+        <td class = "Experiments">0.130</td>
+        <td class = "Experiments">0.101</td>
+      </tr>
+      <tr>
+        <td class = "Experiments">ResNet-18</td>
+        <td class = "Experiments">0.780</td>
+        <td class = "Experiments">0.658</td>
+        <td class = "Experiments">0.552</td>
+        <td class = "Experiments">0.497</td>
+        <td class = "Experiments">0.469</td>
+        <td class = "Experiments">0.457</td>
+        <td class = "Experiments">0.430</td>
+      </tr>
+      <tr>
+        <td class = "Experiments">Random<br>k-d Forest</td>
+        <td class = "Experiments">0.861</td>
+        <td class = "Experiments">0.766</td>
+        <td class = "Experiments">0.652</td>
+        <td class = "Experiments">0.577</td>
+        <td class = "Experiments">0.540</td>
+        <td class = "Experiments">0.513</td>
+        <td class = "Experiments">0.457</td>
+      </tr>
+      <tr>
+        <td class = "Experiments">SuperGlue</td>
+        <td class = "Experiments">0.907</td>
+        <td class = "Experiments">0.828</td>
+        <td class = "Experiments">0.736</td>
+        <td class = "Experiments">0.691</td>
+        <td class = "Experiments">0.661</td>
+        <td class = "Experiments">0.648</td>
+        <td class = "Experiments">0.630</td>
+      </tr>
+      <tr>
+        <td class = "Experiments">...</td>
+        <td class = "Experiments">...</td>
+        <td class = "Experiments">...</td>
+        <td class = "Experiments">...</td>
+        <td class = "Experiments">...</td>
+        <td class = "Experiments">...</td>
+        <td class = "Experiments">...</td>
+        <td class = "Experiments">...</td>
+      </tr>
+    </table>
+  </div>
+  <div class = "WhitePart">
+    <div class = "Empty_20"></div>
+  </div>
+  <div class = "WhitePart">
+    <table border="1">
+      <tr>
+        <td colspan="8" class = "Experiments">Average Recall</td>
+      </tr>
+      <tr>
+        <td class = "Experiments">Top-N</td>
+        <td class = "Experiments">Top-5</td>
+        <td class = "Experiments">Top-10</td>
+        <td class = "Experiments">Top-20</td>
+        <td class = "Experiments">Top-30</td>
+        <td class = "Experiments">Top-40</td>
+        <td class = "Experiments">Top-50</td>
+        <td class = "Experiments">Top-100</td>
+      </tr>
+      <tr>
+        <td class = "Experiments">VGG-16</td>
+        <td class = "Experiments">0.026</td>
+        <td class = "Experiments">0.037</td>
+        <td class = "Experiments">0.047</td>
+        <td class = "Experiments">0.051</td>
+        <td class = "Experiments">0.057</td>
+        <td class = "Experiments">0.060</td>
+        <td class = "Experiments">0.067</td>
+      </tr>
+      <tr>
+        <td class = "Experiments">ResNet-18</td>
+        <td class = "Experiments">0.126</td>
+        <td class = "Experiments">0.157</td>
+        <td class = "Experiments">0.232</td>
+        <td class = "Experiments">0.261</td>
+        <td class = "Experiments">0.279</td>
+        <td class = "Experiments">0.292</td>
+        <td class = "Experiments">0.334</td>
+      </tr>
+      <tr>
+        <td class = "Experiments">Random<br>k-d Forest</td>
+        <td class = "Experiments">0.146</td>
+        <td class = "Experiments">0.221</td>
+        <td class = "Experiments">0.294</td>
+        <td class = "Experiments">0.321</td>
+        <td class = "Experiments">0.338</td>
+        <td class = "Experiments">0.347</td>
+        <td class = "Experiments">0.375</td>
+      </tr>
+      <tr>
+        <td class = "Experiments">SuperGlue</td>
+        <td class = "Experiments">0.163</td>
+        <td class = "Experiments">0.255</td>
+        <td class = "Experiments">0.356</td>
+        <td class = "Experiments">0.405</td>
+        <td class = "Experiments">0.433</td>
+        <td class = "Experiments">0.451</td>
+        <td class = "Experiments">0.511</td>
+      </tr>
+      <tr>
+        <td class = "Experiments">...</td>
+        <td class = "Experiments">...</td>
+        <td class = "Experiments">...</td>
+        <td class = "Experiments">...</td>
+        <td class = "Experiments">...</td>
+        <td class = "Experiments">...</td>
+        <td class = "Experiments">...</td>
+        <td class = "Experiments">...</td>
+      </tr>
+    </table>
+  </div>
+  <div class = "WhitePart">
+    <div class = "Empty_20"></div>
+  </div>
+  <div class = "WhitePart">
+    <div class = "MainText_Content">
+      If you want to show your test result here, please send your e-mail to the following e-mail address:
+      <ul>
+        <li>xywjohn_sgg2020@whu.edu.cn, YiWei Xu, WuHan University</li>
+        <li>yfyu2020@whu.edu.cn, YiFei Yu, WuHan University</li>
+        <li>zhanhao2020@whu.edu.cn, Hao Zhan, WuHan University</li>
+      </ul>
+      Thanks for your support!<br><br>
+    </div>
+  </div>
+
+  <!-- About us -->
+  <div class = "GreyPart">
+    <div class = "MainText_Title"><br><section id = "About us">About us</section><br></div>
+  </div>
+  <div class = "GreyPart">
+    <div class = "MainText_Content">
+      If you have any questions or advice, you can contact us through following address:
+      <ul>
+        <li>xywjohn_sgg2020@whu.edu.cn, YiWei Xu, WuHan University</li>
+        <li>yfyu2020@whu.edu.cn, YiFei Yu, WuHan University</li>
+        <li>zhanhao2020@whu.edu.cn, Hao Zhan, WuHan University</li>
+      </ul>
+      In addition, this project was collaboratively completed by multiple individuals, 
+      and we are deeply grateful for the contributions and support from the following members and organizations:
+    </div>
+  </div>
+  <div class = "GreyPart">
+    <div class = "MainText_Content_End">
+      <br>
+        <div class = "tooltip">H. Zhan<sup>1</sup><div class="tooltiptext">
+          Wu Han University, China
+        </div></div>
+      , <div class = "tooltip">Y.F. Yu<sup>1</sup><div class="tooltiptext">
+        Wu Han University, China
+      </div></div>
+      , <div class = "tooltip">Y.W. Xu<sup>1</sup><div class="tooltiptext">
+        Wu Han University, China
+      </div></div>
+      , <div class = "tooltip">Q.B. Bao<sup>1</sup><div class="tooltiptext">
+        Wu Han University, China
+      </div></div>
+      , <div class = "tooltip">R. Xia<sup>1</sup><div class="tooltiptext">
+        Wu Han University, China
+      </div></div>
+      , <div class = "tooltip">W. Xin<sup>1</sup>*<div class="tooltiptext">
+        Wu Han University, China
+      </div></div>
+      , <div class = "tooltip">Y. Feng<sup>2</sup><div class="tooltiptext">
+        Technical University of Munich, Germany
+      </div></div>
+      , <div class = "tooltip">Z.Q. Zhan<sup>1</sup><div class="tooltiptext">
+        Wu Han University, China
+      </div></div>
+      , <div class = "tooltip">M.L. Li<sup>3</sup><div class="tooltiptext">
+        Nanjing University of Aeronautics and Astronautics, China
+      </div></div>
+      , <div class = "tooltip">M. Gruber<sup>4</sup><div class="tooltiptext">
+        Vexcel Imaging GmbH, Austria
+      </div></div>
+      , <div class = "tooltip">R. Hänsch<sup>5</sup><div class="tooltiptext">
+        German Aerospace Center (DLR), Germany
+      </div></div>
+      , <div class = "tooltip">C. Heipke<sup>6</sup><div class="tooltiptext">
+        Leibniz Universität Hannover, Germany
+      </div></div>
+    </div>
+  </div>
+  <div class = "GreyPart">
+    <div class = "Empty_50"></div>
+  </div>
+</body>
+</html>
